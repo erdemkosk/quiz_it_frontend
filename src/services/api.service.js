@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import axios from 'axios';
 import cookie from 'vue-cookie';
-const API_URL = 'http://localhost:3000';
+const API_URL = 'https://quiz-it-api.herokuapp.com';
 Vue.prototype.$http = axios;
 
 const token = cookie.get('token');
