@@ -29,7 +29,7 @@
                 
                   <tr v-for="  (user, userIndex) in users" v-bind:key="user">
                    
-                    <td class="text-center">
+                    <td class="text-center" v-bind:class="{ winer1: userIndex == 0 , winer2: userIndex == 1 , winer3: userIndex == 2 }" >
                       <div class="img">
                         <b-avatar
                           variant="primary"
@@ -528,6 +528,18 @@ body {
 }
 .table a.table-link.danger:hover {
   color: #dd504c;
+}
+
+.winer1{
+  color: #FCB711;
+}
+
+.winer2{
+  color: #F37021;
+}
+
+.winer3{
+  color: #CC004C;
 }
 
 .table-products tbody > tr > td {
