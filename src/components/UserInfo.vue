@@ -16,7 +16,7 @@
                         button
                         @click="onClick"
                         variant="primary"
-                        :text="nameSurname.match(/[A-Z]/g).join('')"
+                        :text="nameSurname.split(' ').map(w => w[0].toUpperCase() + w.substr(1).toLowerCase()).join(' ').match(/[A-Z]/g).join('')"
                         rounded="lg"
                         size="140px"
                       ></b-avatar>

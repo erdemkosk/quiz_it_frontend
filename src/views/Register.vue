@@ -88,8 +88,9 @@ export default {
     register: function() {
       this.submitted = true;
       this.$v.$touch();
+      // eslint-disable-next-line no-empty
       if (this.$v.$invalid) {
-        console.log("dsfsdf");
+        
       } else {
         // do your submit logic here
         this.submitStatus = "PENDING";

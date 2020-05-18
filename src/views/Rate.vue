@@ -31,7 +31,7 @@
                         <b-avatar
                         variant="primary"
                           rounded="lg"
-                          :text="user.nameSurname.match(/[A-Z]/g).join('')"
+                          :text="user.nameSurname.split(' ').map(w => w[0].toUpperCase() + w.substr(1).toLowerCase()).join(' ').match(/[A-Z]/g).join('')"
                           size="4em"
                         ></b-avatar>
                       </div>
@@ -85,7 +85,6 @@ export default {
   mounted() {
     getTopTen().then(data => {
       this.users = data.data;
-      console.log(data.data);
     });
   }
 };

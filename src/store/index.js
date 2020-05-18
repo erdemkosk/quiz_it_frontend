@@ -44,7 +44,6 @@ export default new Vuex.Store({
                 login(user)
                     .then(resp => {
                         const token = resp.data.data.token;
-                        console.log('Hop' + token);
                         const user = resp.data.data.member;
 
                         cookie.set('id', user._id,  1);

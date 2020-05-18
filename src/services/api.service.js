@@ -72,7 +72,6 @@ export async function deleteWords(id) {
 
 export function getTopTen() {
     const url = `${API_URL}/api/member/top-ten`;
-    console.log(url);
     return axios.get(url).then(response => response.data);
 }
 

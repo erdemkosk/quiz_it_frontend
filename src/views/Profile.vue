@@ -58,7 +58,6 @@ export default {
   methods: {
     handleClick(event) {
       this.clicked = event.target.id;
-      console.log(this.clicked);
     },
     getUserInfo() {
       getUser(this.userId).then(data => {
