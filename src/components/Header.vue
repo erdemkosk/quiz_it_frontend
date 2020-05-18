@@ -7,14 +7,14 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="/top10">Top 10</b-nav-item>
-          <b-nav-item href="/hakkinda">Hakkında</b-nav-item>
+          <b-nav-item href="/#/top10">Top 10</b-nav-item>
+          <b-nav-item href="/#/hakkinda">Hakkında</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <b-nav-item v-if="!isLoggedIn" href="/giris">Giriş Yap</b-nav-item>
-          <b-nav-item v-if="!isLoggedIn" href="/uye-ol">Üye Ol</b-nav-item>
+          <b-nav-item v-if="!isLoggedIn" href="/#/giris">Giriş Yap</b-nav-item>
+          <b-nav-item v-if="!isLoggedIn" href="/#/uye-ol">Üye Ol</b-nav-item>
           <b-nav-item-dropdown v-if="isLoggedIn" right>
             <!-- Using 'button-content' slot -->
 

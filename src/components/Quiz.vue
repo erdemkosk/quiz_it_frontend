@@ -76,8 +76,6 @@
               </div>
               <div>
                 <b-dropdown class="mx-1" right text="☝️">
-                  <b-dropdown-item @click="speechText()">Paylaş 👊</b-dropdown-item>
-                  <b-dropdown-item v-if="isLoggedIn">Kaydet 👊</b-dropdown-item>
                   <b-dropdown-item
                     v-if="isLoggedIn"
                     v-show="!isQuestionReported"

@@ -53,7 +53,7 @@
             <input type="submit" class="btnSubmit" value="Tamamdır 😉" />
           </div>
           <div class="form-group">
-            <a href="/giris" class="ForgetPwd" value="Login">Zaten Üyeyim?</a>
+            <a href="/#/giris" class="ForgetPwd" value="Login">Zaten Üyeyim?</a>
           </div>
         </form>
       </div>
