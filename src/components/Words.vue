@@ -203,8 +203,9 @@ export default {
     async fetchData() {
       this.toggleBusy();
       this.values = await getWords(this.currentPage, this.perPage, this.filter);
-      this.items = this.values.data.data.words;
-      this.totalItems = this.values.data.data.total;
+      console.log(JSON.stringify(this.values));
+      this.items = this.values.data.results.words;
+      this.totalItems = this.values.data.results.total;
       this.toggleBusy();
     },
     toggleBusy() {

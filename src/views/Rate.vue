@@ -34,11 +34,11 @@
                         <b-avatar
                           variant="primary"
                           rounded="lg"
-                          :text="user.nameSurname.split(' ').map(w => w[0].toUpperCase() + w.substr(1).toLowerCase()).join(' ').match(/[A-Z]/g).join('')"
+                          :text="user.member.nameSurname.split(' ').map(w => w[0].toUpperCase() + w.substr(1).toLowerCase()).join(' ').match(/[A-Z]/g).join('')"
                           size="4em"
                         ></b-avatar>
                       </div>
-                      <b> {{user.nameSurname}} </b>
+                      <b> {{user.member.nameSurname}} </b>
                       <br>
                          <small v-if="userIndex<3">
                         <svg
@@ -363,22 +363,22 @@
                     </td>
                     <td>
                       {{
-                      new Date(user.createdAt).getDate() +
+                      new Date(user.member.createdAt).getDate() +
                       "/" +
-                      (new Date(user.createdAt).getMonth() + 1) +
+                      (new Date(user.member.createdAt).getMonth() + 1) +
                       "/" +
-                      new Date(user.createdAt).getFullYear()}}
+                      new Date(user.member.createdAt).getFullYear()}}
                     </td>
                     <td class="text-center">
                       <span class="user-subhead">
-                        <b>{{user.level}}</b>. Seviye
+                        <b>{{user.member.level}}</b>. Seviye
                       </span>
                     </td>
                     <td>
                       <span style="display:block; height: 18px;"></span>
                       <b-progress :max="user.levelExperience" class="mb-3" striped :animated="true">
-                        <b-progress-bar :value="user.currentExperience">
-                          <strong>{{user.currentExperience}} / {{user.levelExperience}}</strong>
+                        <b-progress-bar :value="user.member.currentExperience">
+                          <strong>{{user.member.currentExperience}} / {{user.member.levelExperience}}</strong>
                         </b-progress-bar>
                       </b-progress>
                     </td>
@@ -409,7 +409,8 @@ export default {
   methods: {},
   mounted() {
     getTopTen().then(data => {
-      this.users = data.data;
+      console.log(JSON.stringify(data));
+      this.users = data.results;
     });
   }
 };

@@ -148,10 +148,10 @@ export default {
       });
     },
     assignValuesFromApı(data) {
-      this.answers = data.data.answers;
-      this.question = data.data.question;
-      this.rightAnswer = data.data.answer + 1;
-      this.questionWordId = data.data.questionWordId;
+      this.answers = data.results.answers;
+      this.question = data.results.question;
+      this.rightAnswer = data.results.correctAnswer + 1;
+      this.questionWordId = data.results.questionWordId;
     },
     selectedAnswerOnChange(event) {
       if (this.isReadyForAnswerQuestion) {

@@ -35,10 +35,10 @@ export async function register(user) {
     return axios.post(url, user);
 }
 
-export async function getUser(_id) {
+export async function getUser(id) {
     const url = `${API_URL}/api/member/`;
     return axios.get(url,{ params: {
-        _id
+        id
     } });
 }
 
@@ -57,15 +57,15 @@ export async function updateWords(id, word, translated, difficulty) {
 }
 
 export async function deleteWords(id) {
-     const url = `${API_URL}/api/word/?id=` + id;
+     const url = `${API_URL}/api/word/` + id;
      return axios.delete(url);
  }
 
- export async function updateStatistic( id, isRightAnswer, questionLevel) {
-    const url = `${API_URL}/api/member/updateStatistic/` + id;
+ export async function updateStatistic( id, isRightAnswer, difficulty) {
+    const url = `${API_URL}/api/member/update-statistic/` + id;
     const data = {
         isRightAnswer,
-        questionLevel
+        difficulty
      }
     return axios.put(url,data);
 }

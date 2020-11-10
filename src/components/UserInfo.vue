@@ -207,24 +207,25 @@ export default {
       });
     },
     assignValuesFromApı(data) {
-      this.createdAt = new Date(data.data.data.createdAt);
+      console.log(JSON.stringify(data.data));
+      this.createdAt = new Date(data.data.results.member.createdAt);
       this.createdAt =
         this.createdAt.getDate() +
         "/" +
         (this.createdAt.getMonth() + 1) +
         "/" +
         this.createdAt.getFullYear();
-      this.email = data.data.data.email;
-      this.password = data.data.data.password;
-      this.nameSurname = data.data.data.nameSurname;
-      this.admin = data.data.data.admin;
-      this.level = data.data.data.level;
-      this.levelExperience = data.data.data.levelExperience;
-      this.currentExperience = data.data.data.currentExperience;
-      this.statistic = data.data.data.statistic;
-      this.sections.push( { label: "Toplam Soru", value: data.data.data.statistic.totalQuestion });
-      this.sections.push( { label: "Doğru", value: data.data.data.statistic.totalRightAnswers });
-      this.sections.push( { label: "Yanlış", value: data.data.data.statistic.totalWrongAnswers });
+      this.email = data.data.results.member.email;
+      this.password = data.data.results.member.password;
+      this.nameSurname = data.data.results.member.nameSurname;
+      this.admin = data.data.results.member.admin;
+      this.level = data.data.results.member.level;
+      this.levelExperience = data.data.results.member.levelExperience;
+      this.currentExperience = data.data.results.member.currentExperience;
+      this.statistic = data.data.results.member.statistic;
+      this.sections.push( { label: "Toplam Soru", value: data.data.results.member.statistic.totalQuestion });
+      this.sections.push( { label: "Doğru", value: data.data.results.member.statistic.totalRightAnswers });
+      this.sections.push( { label: "Yanlış", value: data.data.results.member.statistic.totalWrongAnswers });
 
     }
   },
