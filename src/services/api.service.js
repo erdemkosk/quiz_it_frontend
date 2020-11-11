@@ -70,9 +70,19 @@ export async function deleteWords(id) {
     return axios.put(url,data);
 }
 
+export function changePassword(token, password) {
+    const url = `${API_URL}/api/member/change-password/` + token;
+    return axios.put(url, {password}).then(response => response.data);
+}
+
+export function forgetPassword(email) {
+    const url = `${API_URL}/api/member/forget-password/`;
+    return axios.post(url, {email}).then(response => response.data);
+}
+
 export function getTopTen() {
     const url = `${API_URL}/api/member/top-ten`;
-    return axios.get(url).then(response => response.data);
+    return axios.get(url,).then(response => response.data);
 }
 
 

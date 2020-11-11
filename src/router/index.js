@@ -31,6 +31,18 @@ Vue.use(VueRouter)
     meta: {title:'QI | Kayıt Ol'}
   },
   {
+    path: '/token/:token',
+    name: 'ChangePassword',
+    component: () => import(/* webpackChunkName: "about" */ '../views/ChangePassword.vue'),
+    meta: {title:'QI | Şifre Sıfırlama'}
+  },
+  {
+    path: '/sifremi-unuttum',
+    name: 'ForgetPassword',
+    component: () => import(/* webpackChunkName: "about" */ '../views/ForgetPassword.vue'),
+    meta: {title:'QI | Şifre Sıfırlama'}
+  },
+  {
     path: '/top10',
     name: 'Rate',
     component: () => import(/* webpackChunkName: "about" */ '../views/Rate.vue'),

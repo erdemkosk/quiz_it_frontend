@@ -27,7 +27,7 @@
             <input type="submit" class="btnSubmit" value="Giriş Yap 😉" />
           </div>
           <div class="form-group">
-            <a href="#" class="ForgetPwd" value="Login">Şifremi Unuttum?</a>
+            <a href="/#/sifremi-unuttum" class="ForgetPwd" value="Login">Şifremi Unuttum?</a>
           </div>
           <div>
   <b-alert :show="showvar" variant="primary" dismissible>
