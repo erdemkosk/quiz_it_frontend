@@ -74,15 +74,6 @@
               <div class="mr-auto">
                 <b-form-select v-model="selected" :options="options"></b-form-select>
               </div>
-              <div>
-                <b-dropdown class="mx-1" right text="☝️">
-                  <b-dropdown-item
-                    v-if="isLoggedIn"
-                    v-show="!isQuestionReported"
-                    @click="openReportModel()"
-                  >Soru hatalıysa😵, bildir 🤙</b-dropdown-item>
-                </b-dropdown>
-              </div>
             </div>
           </template>
         </b-card>

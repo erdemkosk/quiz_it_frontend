@@ -43,8 +43,8 @@ export default new Vuex.Store({
                 commit('auth_request');
                 login(user)
                     .then(resp => {
-                        const token = resp.data.results.token;
-                        const user = resp.data.results.member;
+                        const token = resp.data.results.accessToken;
+                        const user = resp.data.results.user;
 
                         cookie.set('id', user._id,  1);
                         cookie.set('token', token,  1);

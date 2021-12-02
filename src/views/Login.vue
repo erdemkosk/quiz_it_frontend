@@ -62,6 +62,7 @@ export default {
         .dispatch("login", user)
         .then(() => this.$router.push("/"))
         .catch(err => {
+          console.log(err)
           if (err.response.status == 422) {
             this.errorMessage = "Data anomally.";
           }

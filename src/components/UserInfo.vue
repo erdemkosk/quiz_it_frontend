@@ -208,24 +208,24 @@ export default {
     },
     assignValuesFromApı(data) {
       console.log(JSON.stringify(data.data));
-      this.createdAt = new Date(data.data.results.member.createdAt);
+      this.createdAt = new Date(data.data.results.user.createdAt);
       this.createdAt =
         this.createdAt.getDate() +
         "/" +
         (this.createdAt.getMonth() + 1) +
         "/" +
         this.createdAt.getFullYear();
-      this.email = data.data.results.member.email;
-      this.password = data.data.results.member.password;
-      this.nameSurname = data.data.results.member.nameSurname;
-      this.admin = data.data.results.member.admin;
-      this.level = data.data.results.member.level;
-      this.levelExperience = data.data.results.member.levelExperience;
-      this.currentExperience = data.data.results.member.currentExperience;
-      this.statistic = data.data.results.member.statistic;
-      this.sections.push( { label: "Toplam Soru", value: data.data.results.member.statistic.totalQuestion });
-      this.sections.push( { label: "Doğru", value: data.data.results.member.statistic.totalRightAnswers });
-      this.sections.push( { label: "Yanlış", value: data.data.results.member.statistic.totalWrongAnswers });
+      this.email = data.data.results.user.email;
+      this.password = data.data.results.user.password;
+      this.nameSurname = data.data.results.user.nameSurname;
+      this.admin = data.data.results.user.admin;
+      this.level = data.data.results.user.level;
+      this.levelExperience = data.data.results.user.levelExperience;
+      this.currentExperience = data.data.results.user.currentExperience;
+      this.statistic = data.data.results.user.statistic;
+      this.sections.push( { label: "Toplam Soru", value: data.data.results.user.statistic.totalQuestion });
+      this.sections.push( { label: "Doğru", value: data.data.results.user.statistic.totalRightAnswers });
+      this.sections.push( { label: "Yanlış", value: data.data.results.user.statistic.totalWrongAnswers });
 
     }
   },

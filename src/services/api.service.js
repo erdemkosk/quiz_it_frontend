@@ -22,7 +22,7 @@ export function addReport(reportMessage , questionWordId, userId ) {
 }
 
 export async function login(user) {
-    const url = `${API_URL}/api/member/login/`;
+    const url = `${API_URL}/api/user/login/`;
     const data = {
        email : user.email,
        password : user.password
@@ -31,15 +31,17 @@ export async function login(user) {
 }
 
 export async function register(user) {
-    const url = `${API_URL}/api/member/register/`;
+    const url = `${API_URL}/api/user/register/`;
     return axios.post(url, user);
 }
 
-export async function getUser(id) {
-    const url = `${API_URL}/api/member/`;
-    return axios.get(url,{ params: {
-        id
-    } });
+export async function getUser() {
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    };
+    
+    const url = `${API_URL}/api/user/`;
+    return axios.get(url, config );
 }
 
 export async function getWords(page, limit, filter) {
@@ -62,26 +64,31 @@ export async function deleteWords(id) {
  }
 
  export async function updateStatistic( id, isRightAnswer, difficulty) {
-    const url = `${API_URL}/api/member/update-statistic/` + id;
+    const url = `${API_URL}/api/user/update-statistic/`;
+
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    };
+
     const data = {
         isRightAnswer,
         difficulty
      }
-    return axios.put(url,data);
+    return axios.put(url,data,config);
 }
 
 export function changePassword(token, password) {
-    const url = `${API_URL}/api/member/change-password/` + token;
+    const url = `${API_URL}/api/user/change-password/` + token;
     return axios.put(url, {password}).then(response => response.data);
 }
 
 export function forgetPassword(email) {
-    const url = `${API_URL}/api/member/forget-password/`;
+    const url = `${API_URL}/api/user/forget-password/`;
     return axios.post(url, {email}).then(response => response.data);
 }
 
 export function getTopTen() {
-    const url = `${API_URL}/api/member/top-ten`;
+    const url = `${API_URL}/api/user/top-ten`;
     return axios.get(url,).then(response => response.data);
 }
 

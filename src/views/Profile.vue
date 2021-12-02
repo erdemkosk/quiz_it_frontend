@@ -62,7 +62,7 @@ export default {
     getUserInfo() {
       getUser(this.userId).then(data => {
         console.log(data.data);
-        this.admin = data.data.results.member.admin
+        this.admin = data.data.results.user.admin
       });
     },
   },
