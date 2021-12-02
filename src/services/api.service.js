@@ -35,7 +35,12 @@ export async function register(user) {
     return axios.post(url, user);
 }
 
-export async function getUser() {
+export async function getStatistic() {
+    const url = `${API_URL}/api/statistic//`;
+    return axios.get(url);
+}
+
+export async function getUser(token) {
     const config = {
         headers: { Authorization: `Bearer ${token}` }
     };

@@ -9,32 +9,18 @@
         </header>
         <button type="button" class="btn btn-default">Github</button>
       <div class="row" style="margin-top:80px">
-        <div class="col-md-3">
+        <div class="col-md-6">
           <div class="single_counter p-y-2 m-t-1">
             <i class="fa fa-heart m-b-1"></i>
             <h2 class="statistic-counter"><countTo :startVal='startVal' :endVal='wordCount' :duration='3000'></countTo></h2>
             <p>Farklı Kelime</p>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-6">
           <div class="single_counter p-y-2 m-t-1">
             <i class="fa fa-heart m-b-1"></i>
             <h2 class="statistic-counter"><countTo :startVal='startVal' :endVal='userCount' :duration='3000'></countTo></h2>
             <p>Kullanıcı</p>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="single_counter p-y-2 m-t-1">
-            <i class="fa fa-heart m-b-1"></i>
-            <h2 class="statistic-counter"><countTo :startVal='startVal' :endVal='positiveCommentCount' :duration='3000'></countTo></h2>
-            <p>Olumlu Yorum</p>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="single_counter p-y-2 m-t-1">
-            <i class="fa fa-heart m-b-1"></i>
-            <h2 class="statistic-counter"><countTo :startVal='startVal' :endVal='createdUser' :duration='3000'></countTo></h2>
-            <p>kişi</p>
           </div>
         </div>
       </div>
@@ -64,10 +50,22 @@
 import { mapGetters } from "vuex";
 import countTo from 'vue-count-to';
 import Header from "../components/Header.vue";
+import { getStatistic} from "../services/api.service";
 export default {
   components: {
     Header,
     countTo
+  },
+  methods: {
+    handleClick(event) {
+      this.clicked = event.target.id;
+    },
+    getStatsInfo() {
+      getStatistic().then(data => {
+        this.wordCount = data.data.results.words;
+         this.userCount = data.data.results.users;
+      });
+    },
   },
   data () {
       return {
@@ -78,6 +76,9 @@ export default {
         createdUser: 1,
       }
     },
+  mounted() {
+    this.getStatsInfo();
+  },
      computed: {
     ...mapGetters([
       "getAppName"

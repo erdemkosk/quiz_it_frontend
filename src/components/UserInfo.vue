@@ -186,6 +186,7 @@ export default {
   data: function() {
     return {
       userId: this.$cookie.get("id"),
+      token: this.$cookie.get("token"),
       createdAt: "",
       email: "",
       password: "",
@@ -202,7 +203,7 @@ export default {
   },
   methods: {
     getUserInfo() {
-      getUser(this.userId).then(data => {
+      getUser(this.token).then(data => {
         this.assignValuesFromApı(data);
       });
     },
