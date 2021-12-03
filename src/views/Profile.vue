@@ -51,7 +51,7 @@ export default {
   data: function() {
     return {
       clicked : 1,
-      userId: this.$cookie.get("id"),
+      token: this.$cookie.get("token"),
       admin : false,
     };
   },
@@ -60,8 +60,7 @@ export default {
       this.clicked = event.target.id;
     },
     getUserInfo() {
-      getUser(this.userId).then(data => {
-        console.log(data.data);
+      getUser(this.token).then(data => {
         this.admin = data.data.results.user.admin
       });
     },
