@@ -9,9 +9,13 @@ if (token) {
     Vue.prototype.$http.defaults.headers.common['Authorization'] = token;
 }
 
-export function getQuestion(difficulty) {
+export function getQuestion(difficulty , questionType) {
     const url = `${API_URL}/api/question/`;
-    return axios.get(url,{ params: {
+    const fillInBlanksUrl = `${API_URL}/api/question/fill-in-blanks`;
+
+    let correctUrl = questionType == 1 ? url : fillInBlanksUrl;
+
+    return axios.get(correctUrl,{ params: {
         difficulty
     } }).then(response => response.data);
 }

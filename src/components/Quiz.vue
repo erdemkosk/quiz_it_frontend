@@ -2,6 +2,24 @@
   <div class="d-flex align-items-center min-vh-100">
     <div class="container text-center">
       <div class="quiz" style="min-vh-100">
+        <ul
+          class="
+            nav nav-pills
+            justify-content-center
+            d-flex
+            align-items-center
+            nav-fill
+          "
+        >
+          <li class="nav-item">
+            <a :class="changeClassForNavs(1)" id="nav-words" v-on:click="questionSelectionChanged" aria-current="page" href="#"
+              >Kelimeler</a
+            >
+          </li>
+          <li class="nav-item">
+            <a :class="changeClassForNavs(2)" id="nav-fib" v-on:click="questionSelectionChanged" href="#">Boşluk Doldurma</a>
+          </li>
+        </ul>
         <b-card
           :header-bg-variant="headerClass"
           header-text-variant="white"
@@ -12,20 +30,27 @@
             <div class="d-flex justify-content-end">
               <div class="mr-auto p-2">
                 <h4 class="text-left mb-0">
-                  {{question + " ?"}}
-                  <b-icon-volume-up v-if="!speechStatus" @click="speechText()"></b-icon-volume-up>
-                  <b-icon-volume-up-fill v-if="speechStatus"></b-icon-volume-up-fill>
+                  {{ question + " ?" }}
+                  <b-icon-volume-up
+                    v-if="!speechStatus"
+                    @click="speechText()"
+                  ></b-icon-volume-up>
+                  <b-icon-volume-up-fill
+                    v-if="speechStatus"
+                  ></b-icon-volume-up-fill>
                 </h4>
               </div>
               <div class="p-2">
                 <div class="text-center">
                   <b-button pill :variant="questionButtonClass">
                     Soru
-                    <b-badge variant="light">{{totalQuestionCount}}</b-badge>
+                    <b-badge variant="light">{{ totalQuestionCount }}</b-badge>
                     D
-                      <b-badge variant="light">{{totalSuccesfullCount}}</b-badge>
-                        Y
-                      <b-badge variant="light">{{totalWrongCount}}</b-badge>
+                    <b-badge variant="light">{{
+                      totalSuccesfullCount
+                    }}</b-badge>
+                    Y
+                    <b-badge variant="light">{{ totalWrongCount }}</b-badge>
                   </b-button>
                 </div>
               </div>
@@ -34,7 +59,11 @@
 
           <div class="cardHeight">
             <b-overlay :show="WaitingForGettingQuestion" rounded="sm">
-              <div v-if="!WaitingForGettingQuestion" class="btn-group-toggle" data-toggle="buttons">
+              <div
+                v-if="!WaitingForGettingQuestion"
+                class="btn-group-toggle"
+                data-toggle="buttons"
+              >
                 <label
                   v-for="(answer, answerIndex) in answers"
                   v-bind:key="answerIndex"
@@ -61,7 +90,7 @@
                     :value="answerIndex + 1"
                     @click="selectedAnswerOnChange($event)"
                   />
-                  {{answer}}
+                  {{ answer }}
                 </label>
               </div>
             </b-overlay>
@@ -72,27 +101,30 @@
             <div class="d-flex justify-content-end">
               <div class="p-2">Zorluk:</div>
               <div class="mr-auto">
-                <b-form-select v-model="selected" :options="options"></b-form-select>
+                <b-form-select
+                  v-model="selected"
+                  :options="options"
+                ></b-form-select>
               </div>
             </div>
           </template>
         </b-card>
-        <Report ref="report" @ReportAddedEvent="reportQuestion"></Report>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { getQuestion, addReport, updateStatistic } from "../services/api.service";
-import Report from "./Report.vue";
+import {
+  getQuestion,
+  updateStatistic,
+} from "../services/api.service";
 import { mapGetters } from "vuex";
 
 export default {
   components: {
-    Report
   },
-  data: function() {
+  data: function () {
     return {
       WaitingForGettingQuestion: false,
       isQuestionReported: false,
@@ -110,32 +142,45 @@ export default {
       questionButtonClass: "secondary",
       isSuccesfullAnswer: false,
       isReadyForAnswerQuestion: true,
+      questionType: 1,
       options: [
         { value: "1", text: "A1" },
         { value: "2", text: "A2" },
         { value: "3", text: "B1" },
         { value: "4", text: "B2" },
         { value: "5", text: "C1" },
-        { value: "6", text: "C2" }
+        { value: "6", text: "C2" },
       ],
-      selected: 1
+      selected: 1,
     };
   },
   computed: {
-    ...mapGetters(["isLoggedIn"])
+    ...mapGetters(["isLoggedIn"]),
   },
   methods: {
+    questionSelectionChanged(event) {
+      if (event.target.id !== 'nav-fib') {
+        this.questionType = 1;
+      }
+      else{
+        this.questionType = 2;
+      }
+      this.getQuestion();
+    },
+    changeClassForNavs(eventType) {
+      if (this.questionType === eventType) {
+        return "nav-link active"
+      }
+      else{
+         return "nav-link"
+      }
+    },
     getQuestion() {
-      getQuestion(this.selected).then(data => {
+      getQuestion(this.selected , this.questionType).then((data) => {
+        //console.log(this.questionType)
         this.WaitingForGettingQuestion = false;
         this.isQuestionReported = false;
         this.assignValuesFromApı(data);
-      });
-    },
-    reportQuestion(report) {
-      this.isQuestionReported = true;
-      addReport(report, this.questionWordId, this.userId).then(data => {
-        console.log(data);
       });
     },
     assignValuesFromApı(data) {
@@ -154,7 +199,7 @@ export default {
           this.totalSuccesfullCount++;
         } else {
           this.isSuccesfullAnswer = false;
-           this.totalWrongCount++;
+          this.totalWrongCount++;
         }
         this.totalQuestionCount++;
         this.makeActionsForUser(this.isSuccesfullAnswer);
@@ -175,8 +220,8 @@ export default {
         (this.headerClass = "danger"), (this.questionButtonClass = "dark");
       }
       //If user register send statistic
-      if(this.userId){
-        updateStatistic(this.userId, isSuccessAnswers,this.selected);
+      if (this.userId) {
+        updateStatistic(this.userId, isSuccessAnswers, this.selected);
       }
     },
     changeClass(index) {
@@ -227,7 +272,7 @@ export default {
           index == 4 &&
           this.rightAnswer == 4 &&
           this.selectedAnswer != 4 &&
-          this.isReadyForAnswerQuestion == false
+          this.isReadyForAnswerQuestion == false,
       };
     },
     resetActionsForUser() {
@@ -245,16 +290,16 @@ export default {
       setTimeout(() => {
         this.speechStatus = false;
       }, 1000);
-    }
+    },
   },
   mounted() {
     this.getQuestion();
   },
   watch: {
-    selected: function() {
+    selected: function () {
       this.getQuestion();
-    }
-  }
+    },
+  },
 };
 </script>
 
